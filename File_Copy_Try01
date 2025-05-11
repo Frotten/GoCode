@@ -1,0 +1,51 @@
+package main
+
+import (
+	"fmt"
+	"io"
+	"os"
+)
+
+func copyFile(Dest, Sour string) (int, error) {
+	file1, err := os.Open(Sour)
+	if err != nil {
+		return 0, err
+	}
+	file2, err := os.OpenFile(Dest, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		return 0, err
+	}
+	defer file1.Close()
+	defer file2.Close()
+	BS := make([]byte, 1024)
+	var n, total int
+	for {
+		n, err = file1.Read(BS)
+		if err == io.EOF || n == 0 {
+			fmt.Println("拷贝完毕")
+			break
+		} else if err != nil {
+			fmt.Println("报错")
+			return total, err
+		}
+		total += n
+		file2.Write(BS[:n])
+	}
+	return total, nil
+}
+func main() {
+	file1 := "D:\\TryDir\\Try01.txt"
+	file2 := "D:\\TryDir\\Try02.txt"
+	n, err := copyFile(file2, file1)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("成功拷贝：", n)
+	file1 = "D:\\TryDir\\白咕咕.jpg"
+	file2 = "D:\\TryDir\\TempCopy.jpg"
+	n, err = copyFile(file2, file1)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("成功拷贝：", n)
+}
