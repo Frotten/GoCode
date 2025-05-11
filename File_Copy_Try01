@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 )
 
 func copyFile(Dest, Sour string) (int, error) {
@@ -50,11 +51,15 @@ func copyFile2(Dest, Sour string) (int64, error) {
 func main() {
 	file1 := "D:\\TryDir\\Try01.txt"
 	file2 := "D:\\TryDir\\Try02.txt"
+	start1 := time.Now()
 	n, err := copyFile(file2, file1)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println("成功拷贝：", n)
+	end1 := time.Now()
+	fmt.Println("拷贝函数1拷贝所消耗的时间：", end1.Sub(start1))
+	start2 := time.Now()
 	file1 = "D:\\TryDir\\白咕咕.jpg"
 	file2 = "D:\\TryDir\\TempCopy.jpg"
 	nl, err := copyFile2(file2, file1)
@@ -62,4 +67,6 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("成功拷贝：", nl)
+	end2 := time.Now()
+	fmt.Println("拷贝函数2拷贝所需要的时间：", end2.Sub(start2))
 }
