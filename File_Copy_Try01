@@ -33,6 +33,20 @@ func copyFile(Dest, Sour string) (int, error) {
 	}
 	return total, nil
 }
+
+func copyFile2(Dest, Sour string) (int64, error) {
+	file1, err := os.Open(Sour)
+	if err != nil {
+		return 0, err
+	}
+	file2, err := os.OpenFile(Dest, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		return 0, err
+	}
+	defer file1.Close()
+	defer file2.Close()
+	return io.Copy(file2, file1)
+}
 func main() {
 	file1 := "D:\\TryDir\\Try01.txt"
 	file2 := "D:\\TryDir\\Try02.txt"
@@ -43,9 +57,9 @@ func main() {
 	fmt.Println("成功拷贝：", n)
 	file1 = "D:\\TryDir\\白咕咕.jpg"
 	file2 = "D:\\TryDir\\TempCopy.jpg"
-	n, err = copyFile(file2, file1)
+	nl, err := copyFile2(file2, file1)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("成功拷贝：", n)
+	fmt.Println("成功拷贝：", nl)
 }
