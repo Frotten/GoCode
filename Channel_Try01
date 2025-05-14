@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func main() {
+	TL := make(chan int)
+	var wg sync.WaitGroup
+	go func() {
+		wg.Add(1)
+		defer wg.Done()
+		fmt.Println("Goroutine开始执行")
+		data := <-TL
+		fmt.Println("data :", data)
+	}()
+	time.Sleep(time.Millisecond * 100)
+	fmt.Println("不出意外的话，这句话应该输出在数据之前")
+	TL <- 174
+	wg.Wait()
+}
