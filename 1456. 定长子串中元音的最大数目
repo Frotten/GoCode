@@ -1,0 +1,18 @@
+func maxVowels(s string, k int) int {
+    Temp,Ans := 0, 0
+    for index, value := range s {
+        if value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u' {
+            Temp++
+        }
+        if index < k - 1 {
+            continue
+        }
+        if Ans < Temp {
+            Ans = Temp
+        }
+        if s[index - (k - 1)] == 'a' || s[index - (k - 1)] == 'e' || s[index - (k - 1)] == 'i' || s[index - (k - 1)] == 'o' || s[index - (k - 1)] == 'u' {
+            Temp--
+        }
+    }
+    return Ans
+}
