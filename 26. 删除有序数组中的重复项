@@ -1,0 +1,11 @@
+func removeDuplicates(nums []int) int {
+    counter,temp := 0 ,100000
+    for _,value := range nums {
+        if temp != value {
+            nums[counter] = value
+            counter++
+            temp = value
+        } 
+    }
+    return counter
+}
