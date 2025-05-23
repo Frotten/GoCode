@@ -1,0 +1,8 @@
+func buildArray(nums []int) []int {
+    Sizel := len(nums)
+    Tar := make([]int,Sizel)
+    for i := 0 ; i < Sizel; i++ {
+        Tar[i] = nums[nums[i]]
+    }
+    return Tar
+}

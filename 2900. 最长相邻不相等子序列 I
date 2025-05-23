@@ -1,0 +1,11 @@
+func getLongestSubsequence(words []string, groups []int) []string {
+    Ans := make([]string,0,20)
+    Tag := -1
+    for index, value := range words {
+        if Tag != groups[index] {
+            Ans = append(Ans,value)
+            Tag = groups[index]
+        }
+    }
+    return Ans
+}

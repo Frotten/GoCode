@@ -1,0 +1,26 @@
+func myPow(x float64, n int) float64 {
+    var Temp float64 = 1.0
+    if n < 0 {
+        x = 1 / x
+        n *= -1
+    }
+    if n == 0 {
+        return 1.00000
+    } 
+    for{
+        if n > 0 {
+            if n % 2 == 0 {
+                x = x * x
+                n /= 2
+            } else {
+                Temp *= x
+                n--
+                x = x * x
+                n /= 2
+            }
+        } else {
+            break
+        }
+    }
+    return Temp
+}

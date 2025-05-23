@@ -1,0 +1,38 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"os"
+)
+func main() {
+	file1 := "D:\\TryDir\\Try02.txt"
+	file, err := os.OpenFile(file1, os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	_, err = file.Seek(11, io.SeekStart)
+	if err != nil {
+		panic(err)
+	}
+	BS := make([]byte, 0, 40)
+	Temp := make([]byte, 1)
+	A := []byte{0}
+	for {
+		n, err := file.Read(Temp)
+		fmt.Println("当前读取：", Temp)
+		if err == io.EOF || n == 0 || bytes.Contains(Temp, []byte(" ")) || bytes.Contains(Temp, A) {
+			fmt.Println("Break了")
+			break
+		} else if err != nil {
+			panic(err)
+		}
+		BS = append(BS, Temp...)
+		fmt.Println("N:", n)
+		fmt.Println("当前读取：", Temp)
+		fmt.Println("我所写的空格：", []byte(" "))
+	}
+	fmt.Println("读取到的值：", string(BS))
+}
