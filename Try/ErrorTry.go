@@ -1,22 +1,18 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-)
-
-func Fa(a, b int) (int, error) {
-	if b == 0 {
-		return 0, errors.New("zero division")
-	} else {
-		return a / b, nil
-	}
-}
-func main() {
-	result, err := Fa(1, 0)
-	if err == nil {
-		fmt.Println(result)
-	} else {
-		fmt.Println(err)
-	}
-}
+//func safeMayPanic() {
+//	defer func() {
+//		if r := recover(); r != nil {
+//			fmt.Println("Recover Completely")
+//		}
+//	}()
+//	fmt.Println("Starting")
+//	panic("Something wrong")
+//	//这里不会被执行
+//}
+//
+//func main() {
+//	fmt.Println("Starting")
+//	safeMayPanic()
+//	fmt.Println("Ending")
+//}
