@@ -1,0 +1,30 @@
+func longestCommonPrefix(strs []string) string {
+    if len(strs) == 0 {
+        return ""
+    }
+    for i := 1;i < len(strs) ;i++ {
+        strs[0] = compare(strs[0],strs[i])
+    }
+    return strs[0]
+}
+
+func min(a,b int) int {
+    if a > b {
+        return b
+    } else {
+        return a
+    }
+}
+
+func compare(A, B string) string {
+    n := min(len(A),len(B))
+    count := 0
+    for i := 0; i < n; i++ {
+        if A[count] != B[count] {
+            break
+        } else {
+            count++
+        }
+    }
+    return A[:count]
+}
