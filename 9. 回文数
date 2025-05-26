@@ -1,0 +1,15 @@
+func isPalindrome(x int) bool {
+    if x < 0 {
+        return false
+    }
+    TempString01 := strconv.Itoa(x)
+    n := len(TempString01)
+    tag := true
+    for i := 0; i < n / 2;i++ {  //左侧：i,右侧：n - 1 - i
+        if TempString01[i] != TempString01[n - 1 - i] {
+            tag = false
+            break
+        }
+    }
+    return tag
+}
