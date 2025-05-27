@@ -1,0 +1,42 @@
+func myAtoi(s string) int {
+    Ans := 0
+    tag := false
+    Anti := false
+    Only := false
+    for _, value := range s {
+        if tag == false {
+            if value == ' ' && Only == false {
+                continue
+            } else if value == '-' && Only == false{
+                Anti = true
+                Only = true
+            } else if value >= '0' && value <= '9' {
+                tag = true
+            } else if value == '+' && Only == false{
+                Anti = false
+                Only = true
+            } else {
+                return 0
+            }
+        }
+        if tag == true {
+            if value >= '0' && value <= '9' {
+                Ans *= 10
+                Ans += int(value - '0')
+                if Ans > int(math.Pow(2,31)) - 1 {
+                    Ans = int(math.Pow(2,31)) - 1
+                    if Anti {
+                        Ans++
+                    }
+                    break
+                } 
+            } else {
+                break
+            }
+        }
+    }
+    if Anti {
+        Ans *= -1
+    }
+    return Ans
+}
