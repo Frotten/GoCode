@@ -1,0 +1,27 @@
+func convert(s string, numRows int) string {
+    if numRows <= 1 {
+        return s
+    }
+    Level := 0
+    Up := false
+    Temp := make([][]byte, numRows + 1)
+    n := len(s)
+    for i := 0; i < n; i++ {
+        Temp[Level] = append(Temp[Level], s[i])
+        if Level == numRows - 1 {
+            Up = true
+        } else if Level == 0 && Up == true{
+            Up = false
+        }
+        if Up == false {
+            Level++
+        } else {
+            Level--
+        }
+    }
+    result := []byte{}
+    for i := 0 ;i < numRows ;i++ {
+        result = append(result ,Temp[i]...)
+    }
+    return string(result)
+}
